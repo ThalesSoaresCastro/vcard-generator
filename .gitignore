@@ -32,3 +32,9 @@ vcard-app/.env.production.local
 
 # vercel
 vcard-app/.vercel
+
+
+#BACKEND
+vcard-generator-api/node_modules
+
+vcard-generator-api/.env
