@@ -1,0 +1,34 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+vcard-app/node_modules
+vcard-app/.pnp
+vcard-app/.pnp.js
+
+# testing
+vcard-app/coverage
+
+# next.js
+vcard-app/.next/
+vcard-app/out/
+
+# production
+vcard-app/build
+
+# misc
+vcard-app/.DS_Store
+vcard-app/*.pem
+
+# debug
+vcard-app/npm-debug.log*
+vcard-app/yarn-debug.log*
+vcard-app/yarn-error.log*
+
+# local env files
+vcard-app/.env.local
+vcard-app/.env.development.local
+vcard-app/.env.test.local
+vcard-app/.env.production.local
+
+# vercel
+vcard-app/.vercel
