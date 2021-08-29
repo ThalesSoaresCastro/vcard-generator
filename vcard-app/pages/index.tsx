@@ -9,6 +9,7 @@ import TextHover from '../components/TextHover';
 import iconcarinha from '../public/iconcarinha.svg';
 import iconvcard from '../public/iconvcard.svg';
 import BackgroundApp from '../components/BackgroundApp';
+import Router from 'next/router';
 
 const Home: NextPage = () => {
   return (
@@ -22,7 +23,7 @@ const Home: NextPage = () => {
         top="50%"
         width="100%"
       >
-        <TextHover color={"teal.200"} />
+        <TextHover color={"teal.200"} bg={"gray.900"} />
         <Button 
           backgroundColor="teal.200"
           color="white"
@@ -32,6 +33,9 @@ const Home: NextPage = () => {
             backgroundColor:"blue.300",
             border:"2px",
             borderColor:"teal.200",
+          }}
+          onClick={()=>{
+            Router.push('/candidatos');
           }}
         >
           <Image className="icon" src={iconcarinha} alt='icon carinha'/>
