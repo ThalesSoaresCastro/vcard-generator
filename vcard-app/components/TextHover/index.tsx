@@ -12,6 +12,8 @@ import{
 interface Props{
     color:string;
     bg:string;
+    button?:boolean;
+    urlreturn?:string;
 }
 
 import Router from 'next/router';
@@ -19,7 +21,7 @@ import Router from 'next/router';
 import buttonVoltar from '../../public/voltar_btm.png';
 
 
-const TextHover: React.FC<Props> = ({color, bg}) => {
+const TextHover: React.FC<Props> = ({color, bg, button, urlreturn}) => {
    
   return(
     <Flex 
@@ -30,7 +32,7 @@ const TextHover: React.FC<Props> = ({color, bg}) => {
       mr={8} 
     >
     <Text
-      fontSize={'58px'}
+      fontSize={'48px'}
       //color="teal.200"
       color={color}
       fontWeight="bold"
@@ -38,7 +40,7 @@ const TextHover: React.FC<Props> = ({color, bg}) => {
       vCard
     </Text>
     <Text
-      fontSize={'34px'}
+      fontSize={'28px'}
       textShadow="1px 1px #0FD9E7"
       color={bg}
       fontWeight="bold"
@@ -50,7 +52,9 @@ const TextHover: React.FC<Props> = ({color, bg}) => {
       generator
     </Text>
 
-      <Box
+      {
+        button?
+        <Box
         mt={"40%"}
         w={"18%"}
         alignItems="center"
@@ -60,7 +64,8 @@ const TextHover: React.FC<Props> = ({color, bg}) => {
             opacity: 1,
         }}
         onClick={()=>{
-            Router.push('/');
+            let url = urlreturn?urlreturn:'/';
+            Router.push(url);
         }}
       >
         <Image 
@@ -69,7 +74,8 @@ const TextHover: React.FC<Props> = ({color, bg}) => {
             objectFit="contain"
             objectPosition="center center"
         />
-      </Box>
+      </Box>:null
+      }
 
     </Flex>
   );

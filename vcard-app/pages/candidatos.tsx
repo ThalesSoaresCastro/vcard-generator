@@ -2,6 +2,7 @@
 import React,{
     useState,
     useEffect,
+    useContext,
 } from 'react';
 import type { NextPage } from 'next'
 import Image from 'next/image'
@@ -21,6 +22,8 @@ import {
     allusers,
 }from '../services/vcardservice';
 
+import UserContext from '../contexts/user';
+
 interface IUser{
     id?:number,
     first_name:string,
@@ -39,7 +42,9 @@ interface IUser{
 const Candidatos: React.FC = () => {
 
   const[lCandidatos, SetLCandidatos] = useState([] as IUser[]);  
-  const[candidatoSelect, SetCandidatoSelect] = useState<number>();
+  const[candidatoSelect, SetCandidatoSelect] = useState(0);
+
+  const { user, userIn } = useContext(UserContext);
 
   useEffect(()=>{
       async function allUsersRequest() {
@@ -51,7 +56,10 @@ const Candidatos: React.FC = () => {
       allUsersRequest();
   },[lCandidatos.length])
 
-  console.log(candidatoSelect)
+  async function UserSelect(id:number){
+      const userSelect:IUser = lCandidatos.filter( user => { return(user.id == id) } )[0];
+      await userIn(userSelect);
+  }
   
   return(
     <BackgroundApp color={"gray.100"}>
@@ -65,8 +73,7 @@ const Candidatos: React.FC = () => {
         width="100%"
         >
 
-            <TextHover color={"blue.400"} bg={"gray.100"}/>
-
+            <TextHover color={"blue.400"} bg={"gray.100"} button={true} urlreturn={'/'} />
 
             <Flex
                 w={"20%"}
@@ -100,11 +107,15 @@ const Candidatos: React.FC = () => {
             </Flex>
 
             <Button
+                isDisabled={(!candidatoSelect)?true : false}
                 backgroundColor={(!candidatoSelect)?"gray.500" : "orange"}
                 color="white"
                 ml={"2%"}
                 mt={"1%"}
                 borderRadius={"14px"}
+                onClick={async()=>{
+                    UserSelect(candidatoSelect);
+                }}
             >
                 gerar vCard
 

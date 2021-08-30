@@ -28,12 +28,33 @@ export const userbyid=async(id:number)=>{
         .catch( err =>{ return err })
 }
 
+
+
 export const qrcodebyid=async(id:number)=>{
     const url = '/vcard/qrcode/commcepter';
     return await api.get(`${url}/${id}`)
     .then( res =>{ return res })
     .catch( err =>{ return err })
 }
+
+export const qrcodebyidinfile=async(id:number)=>{
+    const url = '/vcard/qrcode/commcepter';
+
+    const config:any = {responseType: 'blob'};
+    const fileName:string = '../public/qrcodeuser';
+
+    return await api.get(`${url}/${id}`, {responseType: "arraybuffer"})
+    .then( res =>{
+       return res
+        //return new File([res.data], fileName,{type:'png'});
+        //const blob = new Blob([res.data], {type:'application/png',})
+
+        //return fileName;
+    })
+    .catch( err =>{ return err })
+
+}
+
 
 export const newuser=async(user:IUser)=>{
     const url = '/vcard/qrcode/new';
