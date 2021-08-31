@@ -15,13 +15,13 @@ interface IUser{
     city:string,
     street:string,
     state:string,
-    color:string
+    color?:string
 }
 
 interface UserContextData{
     user: IUser | null;
     qrcode: string;
-    userIn: (user:IUser) => Promise<void>;
+    userIn: (user:IUser, code?:string ) => Promise<void>;
 }
 
 const UserContext = createContext<UserContextData>({} as UserContextData);
@@ -31,16 +31,22 @@ export const UserProvider: React.FC = ({children}) =>{
     const [user,setUser] = useState<IUser | null>(null);
     const [qrcode, SetqrCode] = useState<string>('');
 
-    async function userIn(user: IUser){
+    async function userIn(user: IUser, code?: string){
         setUser(user);
-
-        if(user && user.id){
+        if(user && user.id){    
             const response = await qrcodebyidinfile(user.id);
-            if(response.status === 200){
-                let base64ImageString = Buffer.from(response.data, 'binary').toString('base64');
-                SetqrCode(base64ImageString);
-            }
+                if(response.status === 200){
+                    let base64ImageString = Buffer.from(response.data, 'binary').toString('base64');
+                    await SetqrCode(base64ImageString);
+                }
         }
+        
+        if(code && code.length > 1){
+            //console.log(code);
+            let base64ImageString = Buffer.from(code, 'binary').toString('base64');
+            await SetqrCode(base64ImageString);
+        }
+        
         Router.push('/vcard');
     }
     

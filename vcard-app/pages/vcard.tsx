@@ -8,10 +8,8 @@ import Image from 'next/image';
 
 import{
     Flex,
-    Button,
     Text,
     Box,
-    Select,
 } from '@chakra-ui/react'
 
 import UserContext from '../contexts/user';
@@ -20,8 +18,6 @@ import BackgroundApp from '../components/BackgroundApp';
 
 import iconImage from '../public/iconcommcepta.png';
 import logoBottom from '../public/logocommcepta.png';
-
-import Router from 'next/router';
 
 const Vcard: React.FC = () => {
     
@@ -33,7 +29,6 @@ const Vcard: React.FC = () => {
             if(qrcode){
                 let src = "data:image/png;base64,"+qrcode;
                 SetValue(src);
-
             }    
         }
         img_qrcode();
@@ -118,7 +113,6 @@ const Vcard: React.FC = () => {
                         width="160%"
                         height="160%"
                         layout="fixed"
-
                     />
                     </Flex>           
                     :null

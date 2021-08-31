@@ -55,6 +55,9 @@ const Home: NextPage = () => {
             backgroundColor:"blue.300",
             borderColor:"teal.200",
           }}
+          onClick={()=>{
+            Router.push('/cadastro');
+          }}
         >
           <Image className="icon" src={iconvcard} alt='icon vcard'/>
           <style jsx global>{`
