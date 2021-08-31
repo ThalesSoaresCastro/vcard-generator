@@ -1,18 +1,34 @@
-# Teste Commcepta - Fullstack
+# Vcard-application
 
-Bem-vindo candidato@ ao teste para pessoa desenvolvedora fullstack. 
+## Com Docker:
 
-O gerador de V-Card será um software que permite gerar cartões virtuais personalizados para commcepters cadastrados e novos commcepters. Nossa equipe de backend desenvolveu uma API REST que permite com que os cartões sejam gerados dinamicamente, enquanto nossos designers já prepararam o layout. Como programador *fullstack*, seu desafio será tornar a aplicação em um *web app* **funcional** e **responsivo** em múltiplos dispositivos. 
+Por padrão o fastify é vinculado ao localhost, sendo necessário declarar explicitamente
+o endereço 0:0:0:0 em listen para que seja possível o acesso no container, alterar:
+/vcard-generator-api/server.js
 
-Para implementar a solução, siga as seguintes instruções:
+mudar de:
+app.listen(port, (err, address) => { ...
 
-1. Faça o fork deste repositório para um repositório cópia em sua conta;
-2. Implemente a solução livremente, com as mudanças finais presentes em um branch **main** no repositório cópia;
-3. Substitua esse README por informações claras de instalação da sua implementação;
-4. Realize um merge request do branch **main** do repositório cópia para o branch com **seu nome** neste repositório.
-
-Boa sorte!
-
+para:
+app.listen(port,'0.0.0.0', (err,address) => { ...
 
 
-Equipe Commcepta.
+Rodar docker-compose -p <stack-name> up -d ou apenas docker-compose up -d
+A api ficará setada na porta 3000 e o front-end irá estar na porta 5051
+Para acessar o front-end: http://localhost:5051
+
+## Sem Docker:
+
+** 1 passo: Inicializar a api(vcard-generator-api) na porta desejada;
+
+** 2 passo: Inicializar o next-app:
+
+executar em modo de desenvolvimento:
+- yarn dev ou npm run dev
+
+executar em modo de produção:
+- yarn build ou npm run build
+- yarn start ou npm run start
+
+Acessar o endereço: http://localhost:5051
+

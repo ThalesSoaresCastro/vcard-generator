@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  vcard-generator-api:
+    container_name: 'vcard-generator-api'
+    build: './vcard-generator-api'
+    restart: always
+    command: npm run start
+    volumes:
+      - ./vcard-generator-api:/usr/src/app/
+      - /usr/src/app/node_modules
+    ports:
+      - '3000:3000'
+    networks:
+      - 'vcard-fullstack'
+    expose:
+      - '3000'
+
+  vcard-app:
+    container_name: 'vcard-app'
+    build: './vcard-app'
+    command: start
+    volumes:
+      - ./vcard-app:/usr/src/app/
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+    ports:
+      - '5051:5051'
+    depends_on: 
+      - 'vcard-api'
+    networks:
+      - 'vcard-fullstack'
+networks: 
+  vcard-fullstack:
+    driver: bridge
